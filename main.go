@@ -222,7 +222,7 @@ func main() {
 // ─────────────────────────────────────────────
 // Swagger OpenAPI 2.0 Specification
 // ─────────────────────────────────────────────
-
+// Remove "default" and "enum" so Swagger UI shows a normal text input
 const swaggerSpec = `{
   "swagger": "2.0",
   "info": {
@@ -250,11 +250,11 @@ const swaggerSpec = `{
           {
             "name": "lang",
             "in": "path",
-            "description": "語系代碼\n\nzh-tw -正體中文\nzh-cn -簡體中文\nen -英文\nja -日文\nko -韓文",
+            "description": "語系代碼\n\n* zh-tw -正體中文\n* zh-cn -簡體中文\n* en -英文\n* ja -日文\n* ko -韓文",
             "required": true,
             "type": "string",
-            "default": "zh-tw",
-            "enum": ["zh-tw", "zh-cn", "en", "ja", "ko"]
+            // "default": "zh-tw",
+            // "enum": ["zh-tw", "zh-cn", "en", "ja", "ko"]
           },
           {
             "name": "page",
@@ -331,9 +331,12 @@ const swaggerHTML = `<!DOCTYPE html>
       layout: "BaseLayout",
       deepLinking: true,
       displayOperationId: false,
-      defaultModelsExpandDepth: 1,
-      defaultModelExpandDepth: 1,
-      tryItOutEnabled: true
+	  // Hide Models section
+      defaultModelsExpandDepth: -1,
+	  // Expand model fields by one level
+      defaultModelExpandDepth: -1,
+	  // Do not enable "Try it out" automatically
+      tryItOutEnabled: false
     });
   </script>
 </body>
